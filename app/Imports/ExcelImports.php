@@ -19,7 +19,8 @@ class ExcelImports implements ToModel
             'category_name' => $row[1],
             'slug_category_product' => $row[2],
             'category_desc' => $row[3],
-            'category_status' => $row[4],
+            'category_parent' => $row[4],
+            'category_status' => $row[5],
         ]);
     }
 }

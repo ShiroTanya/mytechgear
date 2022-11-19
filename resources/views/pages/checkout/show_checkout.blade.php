@@ -10,24 +10,38 @@
 				</ol>
 			</div>
 
-			<div class="register-req">
+			@if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {!! session()->get('message') !!}
+                    </div>
+	                @elseif(session()->has('error'))
+	                     <div class="alert alert-danger">
+	                        {{ session()->get('error') }}
+	                    </div>
+	                @endif
+
+{{-- 			<div class="register-req">
 				<p>Làm ơn đăng ký hoặc đăng nhập để thanh toán giỏ hàng và xem lại lịch sử mua hàng</p>
-			</div><!--/register-req-->
+			</div><!--/register-req--> --}}
 
 			<div class="shopper-informations">
 				<div class="row">
-					
+					<style type="text/css">
+						.col-md-6.form-style input[type=text]{
+							margin: 5px 0 ;
+						}
+					</style>
 					<div class="col-sm-12 clearfix">
 						<div class="bill-to">
-							<p>Điền thông tin gửi hàng</p>
-							<div class="form-one">
+							<p style="margin-left: 30px">Điền thông tin gửi hàng</p>
+							<div class="col-md-6 form-style">
 								<form method="POST">
 									@csrf
-									<input type="text" name="shipping_email" class="shipping_email" placeholder="Điền email">
-									<input type="text" name="shipping_name" class="shipping_name" placeholder="Họ và tên người gửi">
-									<input type="text" name="shipping_address" class="shipping_address" placeholder="Địa chỉ gửi hàng">
-									<input type="text" name="shipping_phone" class="shipping_phone" placeholder="Số điện thoại">
-									<textarea name="shipping_notes" class="shipping_notes" placeholder="Ghi chú đơn hàng của bạn" rows="5"></textarea>
+									<input type="text" name="shipping_email" class="shipping_email form-control" placeholder="Điền email">
+									<input type="text" name="shipping_name" class="shipping_name form-control" placeholder="Họ và tên người nhận">
+									<input type="text" name="shipping_address" class="shipping_address form-control" placeholder="Địa chỉ gửi hàng">
+									<input type="text" name="shipping_phone" class="shipping_phone form-control" placeholder="Số điện thoại">
+									<textarea name="shipping_notes" class="shipping_notes form-control" placeholder="Ghi chú đơn hàng của bạn" rows="5"></textarea>
 									
 									@if(Session::get('fee'))
 										<input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
@@ -54,12 +68,18 @@
 		                                    </select>
 		                                </div>
 									</div>
-									<input type="button" value="Xác nhận đơn hàng" name="send_order" class="btn btn-primary btn-sm send_order">
+										<div style="margin-bottom: 50px">
+											<input type="button" value="Xác nhận đơn hàng" name="send_order" class="btn btn-primary btn-sm send_order">
+										</div>
 								</form>
+							</div>
+
+							<div class="col-md-6">
 								<form>
                                     @csrf 
                              
                                 <div class="form-group">
+                                	<br><br>
                                     <label for="exampleInputPassword1">Chọn thành phố</label>
                                       <select name="city" id="city" class="form-control input-sm m-bot15 choose city">
                                     
@@ -84,24 +104,26 @@
                                     </select>
                                 </div>
                                
-                               
+
                               	<input type="button" value="Tính phí vận chuyển" name="calculate_order" class="btn btn-primary btn-sm calculate_delivery">
 
 
                                 </form>
+                            </div>
 
-							</div>
-							
 						</div>
+							
 					</div>
+					</div>
+
 					<div class="col-sm-12 clearfix">
 						  @if(session()->has('message'))
 			                    <div class="alert alert-success">
-			                        {{ session()->get('message') }}
+			                        {!! session()->get('message') !!}
 			                    </div>
 			                @elseif(session()->has('error'))
 			                     <div class="alert alert-danger">
-			                        {{ session()->get('error') }}
+			                        {!! session()->get('error') !!}
 			                    </div>
 			                @endif
 						<div class="table-responsive cart_info">
@@ -164,7 +186,8 @@
 									@endforeach
 									<tr>
 										<td><input type="submit" value="Cập nhật giỏ hàng" name="update_qty" class="check_out btn btn-default btn-sm"></td>
-										<td><a class="btn btn-default check_out" href="{{url('/del-all-product')}}">Xóa tất cả</a></td>
+										<td><a class="btn btn-default check_out" href="{{url('/del-all-product')}}">Xóa tất cả</a></td>										
+
 										<td>
 											@if(Session::get('coupon'))
 				                          	<a class="btn btn-default check_out" href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
@@ -217,8 +240,9 @@
 											Phí vận chuyển <span>{{number_format(Session::get('fee'),0,',','.')}} VNĐ</span></li> 
 											<?php $total_after_fee = $total + Session::get('fee'); ?>
 										@endif 
-										<li>Tổng còn:
+										<li>Tổng thanh toán:
 										@php 
+
 											if(Session::get('fee') && !Session::get('coupon')){
 												$total_after = $total_after_fee;
 												echo number_format($total_after,0,',','.').' VNĐ';
@@ -254,18 +278,52 @@
 
 							</form>
 								@if(Session::get('cart'))
-								<tr><td>
-
-										<form method="POST" action="{{url('/check-coupon')}}">
+								<tr>
+										<td>
+											<form method="POST" action="{{url('/check-coupon')}}">
 											@csrf
-												<input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
+												<input autocomplete="off" type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
 				                          		<input type="submit" class="btn btn-default check_coupon" name="check_coupon" value="Tính mã giảm giá">
 				                          	
 			                          		</form>
 			                          	</td>
+			                          	<td>
+											<form method="POST" action="{{url('/vn-payment')}}" style="text-align: right; padding-top: 60px">
+												@csrf										
+												<input type="hidden" name="total_vnpay" value="{{$total_after}}">
+												<button style="background: #fff;border-color: black" type="submit" class="btn" name="redirect"><img style="width: 20px"src="{{('public/frontend/images/Iconvnpay.png')}}"><span> Thanh toán VNPay</span></button>
+											</form>
+
+										</td>
+
+										<td>
+											<form method="POST" action="{{url('/momo-payment')}}" style="text-align: right; padding-top: 60px">
+											@csrf										
+											<input type="hidden" name="total_momo" value="{{$total_after}}">
+											
+											<button style="background:#b07;border-color: #357ebd;color: #fff" type="submit" class="btn btn-default check_coupon" name="payUrl"><img style="width: 20px"src="{{('public/frontend/images/Iconmomo.png')}}"><span> Thanh toán MOMO</span></button>
+										</form>
+										</td>
+
+										<td>
+											<div style="margin-top: 70px;padding-left: 50px">
+												@php
+														$vnd_to_usd = $total_after/23083;
+
+
+													@endphp
+												<div id="paypal-button">
+													<input type="hidden" id="vnd_to_usd" value="{{round($vnd_to_usd,2)}}">
+
+												</div>	
+											</div>							
+								</td>
+
+
 								</tr>
 								@endif
 
+								
 							</table>
 
 						</div>

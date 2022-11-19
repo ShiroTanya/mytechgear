@@ -8,10 +8,11 @@ use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use DB;
+use Auth;
 class SliderController extends Controller
 {
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id');
+        $admin_id = Auth::id();;
         if($admin_id){
             return Redirect::to('dashboard');
         }else{
@@ -19,7 +20,7 @@ class SliderController extends Controller
         }
     }
     public function manage_slider(){
-        $all_slide = Slider::orderBy('slider_id','DESC')->get();
+        $all_slide = Slider::orderBy('slider_id','DESC')->paginate(2);
         return view('admin.slider.list_slider')->with(compact('all_slide'));
     }
     public function add_slider(){
@@ -70,8 +71,15 @@ class SliderController extends Controller
 
     public function delete_slider($slide_id)
     {
-        $this -> AuthLogin();
-        DB::table('tbl_slider')->where('slider_id', $slide_id)->delete();
+        $slider = Slider::find($slide_id);
+        $slider_del = $slider->slider_image;
+        if($slider_del)
+        {   
+            $path = 'public/uploads/slider/'.$slider_del;
+            unlink($path);
+        }
+
+        $slider -> delete();
         Session::put('message', 'Xóa Slider thành công');
         return Redirect::to('manage-slider');
     }

@@ -22,15 +22,15 @@
                                    @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên mã giảm giá</label>
-                                    <input type="text" name="coupon_name" class="form-control" id="exampleInputEmail1">
+                                    <input type="text" required data-validation="length" data-validation-length="min1" data-validation-error-msg="Tên mã không được để trống" name="coupon_name" class="form-control" id="exampleInputEmail1">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Mã giảm giá</label>
-                                    <input type="text" name="coupon_code" class="form-control" id="exampleInputEmail1">
+                                    <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Mã giảm giá không được để trống" name="coupon_code" class="form-control" id="exampleInputEmail1">
                                 </div>
                                <div class="form-group">
                                     <label for="exampleInputPassword1">Số lượng mã</label>
-                                    <input type="text" name="coupon_time" class="form-control" id="exampleInputEmail1">
+                                    <input type="text" data-validation="number" data-validation-error-msg="Số lượng mã không được để trống và không phải là số âm" name="coupon_time" class="form-control" id="exampleInputEmail1">                           
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Tính năng mã</label>
@@ -39,14 +39,11 @@
                                     <option value="1">Giảm theo phần trăm</option>
                                     <option value="2">Giảm theo tièn</option>
                                 </select>    
-                                </div>
- <div class="form-group">
+                                </div>                               
+                                <div class="form-group">
                                     <label for="exampleInputPassword1">Nhập số % hoặc tiền giảm</label>
-                                    <input type="text" name="coupon_number" class="form-control" id="exampleInputEmail1">
+                                    <input type="text" data-validation="number" data-validation-error-msg="Vui lòng không để trống ô này" name="coupon_number" class="form-control" id="exampleInputEmail1">
                                 </div>
-
-                              
-
                                 <button type="submit" name="add_coupon" class="btn btn-info">Thêm mã</button>
                             </form>
                             </div>

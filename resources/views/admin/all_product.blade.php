@@ -5,8 +5,8 @@
     <div class="panel-heading">
       Liệt kê sản phẩm
     </div>
-    <div class="row w3-res-tb">
-      <div class="col-sm-5 m-b-xs">
+ <div class="row w3-res-tb">
+      {{-- <div class="col-sm-5 m-b-xs">
         <select class="input-sm form-control w-sm inline v-middle">
           <option value="0">Bulk action</option>
           <option value="1">Delete selected</option>
@@ -14,14 +14,14 @@
           <option value="3">Export</option>
         </select>
         <button class="btn btn-sm btn-default">Apply</button>                
-      </div>
-      <div class="col-sm-4">
+      </div> --}}
+      <div class="col-sm-9">
       </div>
       <div class="col-sm-3">
         <div class="input-group">
           <input type="text" class="input-sm form-control" placeholder="Search">
           <span class="input-group-btn">
-            <button class="btn btn-sm btn-default" type="button">Go!</button>
+            <button class="btn btn-sm btn-default" type="button">Tìm kiếm</button>
           </span>
         </div>
       </div>
@@ -52,7 +52,8 @@
             <th>Tên sản phẩm</th>
             <th>SL tồn</th>            
             <th>Slug</th>
-            <th>Giá</th>
+            <th>Giá bán</th>
+            <th>Giá Gốc</th>
             <th>Hình sản phẩm</th>
             <th>Danh mục</th>
             <th>Thương hiệu</th>
@@ -69,7 +70,8 @@
             <td>{{ $pro->product_name }}</td>
             <td>{{ $pro->product_quantity }}</td>
             <td>{{ $pro->product_slug }}</td>
-            <td>{{ $pro->product_price }}</td>
+            <td>{{ number_format($pro->product_price,0,',','.')}}</td>
+            <td>{{ number_format($pro->price_cost,0,',','.')}}</td>
             <td><img src="public/uploads/product/{{ $pro->product_image }}" height="100" width="100"></td>
             <td>{{ $pro->category_name }}</td> 
             <td>{{ $pro->brand_name }}</td> 

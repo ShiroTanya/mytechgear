@@ -13,8 +13,7 @@ class DeliveryController extends Controller
     public function update_delivery(Request $request){
         $data = $request->all();
         $fee_ship = Feeship::find($data['feeship_id']);
-        $fee_value = rtrim($data['fee_value'],'.');    
-         //Hàm rtrim() sẽ loại bỏ khoảng trắng( hoặc các kí tự bất kỳ được truyền vào bởi người dùng) dư thừa ở cuối chuỗi.Trong trường hợp này là số tiền.
+        $fee_value = rtrim($data['fee_value'],'.');
         $fee_ship->fee_feeship = $fee_value;
         $fee_ship->save();
     }
@@ -35,7 +34,7 @@ class DeliveryController extends Controller
                 ';
 
                 foreach($feeship as $key => $fee){
-                                            //---------in ra phi' -> vao` Model Feeship -> function->...
+
                 $output.='
                     <tr>
                         <td>'.$fee->city->name_city.'</td>
@@ -75,7 +74,7 @@ class DeliveryController extends Controller
         if($data['action']){
             $output = '';
             if($data['action']=="city"){
-                $select_province = Province::where('matp',$data['ma_id'])->orderby('maqh','ASC')->get(); //ĐK: matp = lay theo ma_id
+                $select_province = Province::where('matp',$data['ma_id'])->orderby('maqh','ASC')->get();
                     $output.='<option>---Chọn quận huyện---</option>';
                 foreach($select_province as $key => $province){
                     $output.='<option value="'.$province->maqh.'">'.$province->name_quanhuyen.'</option>';

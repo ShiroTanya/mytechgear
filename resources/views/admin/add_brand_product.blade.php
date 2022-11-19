@@ -22,11 +22,11 @@
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên thương hiệu</label>
-                                    <input type="text" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                                    <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Tên thương hiệu không được để trống" name="brand_name" class="form-control" onkeyup="ChangeToSlug();" id="slug" placeholder="Tên thương hiệu">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Slug</label>
-                                    <input type="text" name="brand_slug" class="form-control" id="exampleInputEmail1" placeholder="Slug">
+                                    <label for="exampleInputEmail1">Slug </label>
+                                    <input type="text" name="brand_slug" class="form-control" id="convert_slug" placeholder="Slug">
                                 </div>
                                 <div class="form-group">                           
                                     <label for="exampleInputPassword1">Mô tả thương hiệu</label>

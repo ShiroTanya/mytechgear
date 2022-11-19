@@ -26,6 +26,7 @@
             <th>Mã đơn hàng</th>
             <th>Ngày tháng đặt hàng</th>
             <th>Tình trạng đơn hàng</th>
+            <th>Lý do huỷ đơn hàng</th>
 
             <th style="width:30px;"></th>
           </tr>
@@ -44,16 +45,21 @@
             <td>{{ $ord->created_at }}</td>
             <td>@if($ord->order_status==1)
                     Đơn hàng mới ( chưa xử lý )
-
                 @elseif($ord->order_status==2)
-                    Giao hàng thành công
-
+                    <span class="text text-success">Giao hàng thành công</span> 
                 @else
-                    Đơn hàng đã bị hủy ( đang trong quá trình xử l)
+                   <span class="text text-danger">Đơn hàng bị huỷ </span> 
                 @endif
             </td>
-           
-           
+
+
+           <td>
+            @if($ord->order_status==3)
+             {{$ord->order_destroy}}
+             @else
+              Không
+             @endif
+           </td>
             <td>
               <a href="{{URL::to('/view-order/'.$ord->order_code)}}" class="active styling-edit" ui-toggle-class="">
                 <i class="fa fa-eye text-success text-active"></i></a>
@@ -68,6 +74,20 @@
         </tbody>
       </table>
     </div>
+
+    <footer class="panel-footer">
+      <div class="row">
+        
+        {{-- <div class="col-sm-5 text-center">
+          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+        </div> --}}
+        <div class="col-sm-7 text-right text-center-xs">                
+          <ul class="pagination pagination-sm m-t-none m-b-none">
+                       {!!$order->links()!!}
+          </ul>
+        </div>
+      </div>
+    </footer>
    
   </div>
 </div>

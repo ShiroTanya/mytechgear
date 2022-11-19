@@ -23,7 +23,7 @@
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên danh mục</label>
-                                    <input type="text" value="{{$edit_value->brand_name}}" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                                    <input type="text" value="{{$edit_value->brand_name}}" data-validation="length" data-validation-length="min1" data-validation-error-msg="Tên thương hiệu không được để trống" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Slug</label>

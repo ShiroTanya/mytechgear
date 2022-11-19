@@ -17,36 +17,67 @@
                                 <div class="single-products">
                                         <div class="productinfo text-center">
                                             <form>
-                                                @csrf
+                                            @csrf
                                             <input type="hidden" value="{{$product->product_id}}" class="cart_product_id_{{$product->product_id}}">
-                                            <input type="hidden" value="{{$product->product_name}}" class="cart_product_name_{{$product->product_id}}">
+
+                                            <input type="hidden" id="wishlist_productname{{$product->product_id}}" value="{{$product->product_name}}" class="cart_product_name_{{$product->product_id}}">
+
+                                          
+                                            <input type="hidden" value="{{$product->product_quantity}}" class="cart_product_quantity_{{$product->product_id}}">
+                                            
                                             <input type="hidden" value="{{$product->product_image}}" class="cart_product_image_{{$product->product_id}}">
-                                            <input type="hidden" value="{{$product->product_price}}" class="cart_product_price_{{$product->product_id}}">
+                                            <input type="hidden" id="wishlist_productprice{{$product->product_id}}" value="{{$product->product_price}}" class="cart_product_price_{{$product->product_id}}">
                                             <input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
 
-                                            <a href="{{URL::to('/chi-tiet-san-pham/'.$product->product_slug)}}">
-                                                <img height="200px" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
-                                                <h2>{{number_format($product->product_price,0,',','.').' '.'VNĐ'}}</h2>
-                                                <p>{{$product->product_name}}</p>
+                                            <a id="wishlist_producturl{{$product->product_id}}" href="{{URL::to('/chi-tiet-san-pham/'.$product->product_slug)}}">
+                                                <img id="wishlist_productimage{{$product->product_id}}" height="150px" src="{{URL::to('public/uploads/product/'.$product->product_image)}}" alt="" />
+                                                <h2>{{number_format($product->product_price,0,',','.')}}VNĐ</h2>
+                                                
+                                                <p style="font-size: 13px">{{$product->product_name}}</p>
 
                                              
                                              </a>
-                                            <input type="button" value="Thêm giỏ hàng" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">
+                                            <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">Thêm giỏ hàng</button>
                                             </form>
-
+ 
                                         </div>
                                       
                                 </div>
                            
                                 <div class="choose">
                                     <ul class="nav nav-pills nav-justified">
-                                        <li><a href="#"><i class="fa fa-plus-square"></i>Yêu thích</a></li>
+                                        <style type="text/css">
+                                            ul.nav.nav-pills.nav-justified li {
+                                                text-align: center;
+                                                font-size: 13px;
+                                            }
+                                            .button_wishlist{
+                                                border: none;
+                                                background: #ffff;
+                                                color: #B3AFA8;
+                                            }
+                                            ul.nav.nav-pills.nav-justified i{
+                                                color: #B3AFA8;
+                                            }
+                                            .button_wishlist span:hover{
+                                                color: #FE980F;
+                                            }
+                                            .button_wishlist :focus{
+                                                border: none;
+                                                outline: none;
+                                            }
+
+                                        </style>
+                                        <li>
+                                            <i class="fa fa-plus-square"></i>
+                                            <button class="button_wishlist" id="{{$product->product_id}}" onclick="add_wishlist(this.id);"><span>Yêu thích</span></button>
+                                        </li>
                                         <li><a href="#"><i class="fa fa-plus-square"></i>So sánh</a></li>
                                     </ul>
                                 </div>
                             </div>
-                    
                         </div>
+
                         </a>
                         @endforeach
                     </div><!--features_items-->

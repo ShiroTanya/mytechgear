@@ -11,11 +11,11 @@
 			</div>
 			  @if(session()->has('message'))
                     <div class="alert alert-success">
-                        {{ session()->get('message') }}
+                        {!! session()->get('message') !!}
                     </div>
                 @elseif(session()->has('error'))
                      <div class="alert alert-danger">
-                        {{ session()->get('error') }}
+                        {!! session()->get('error') !!}
                     </div>
                 @endif
 			<div class="table-responsive cart_info">
@@ -27,6 +27,7 @@
 						<tr class="cart_menu">
 							<td class="image">Hình ảnh</td>
 							<td class="description">Tên sản phẩm</td>
+							<td class="description">Số lượng tồn</td>							
 							<td class="price">Giá sản phẩm</td>
 							<td class="quantity">Số lượng</td>
 							<td class="total">Thành tiền</td>
@@ -52,16 +53,18 @@
 								<h4><a href=""></a></h4>
 								<p>{{$cart['product_name']}}</p>
 							</td>
+							<td class="cart_description">
+								<h4><a href=""></a></h4>
+								<p>{{$cart['product_quantity']}}</p>
+							</td>
 							<td class="cart_price">
 								<p>{{number_format($cart['product_price'],0,',','.')}} VNĐ</p>
+								
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
-								
-								
-									<input class="cart_quantity" type="number" min="1" name="cart_qty[{{$cart['session_id']}}]" value="{{$cart['product_qty']}}"  >
-								
-									
+													
+									<input class="cart_quantity" type="number" min="1" name="cart_qty[{{$cart['session_id']}}]" value="{{$cart['product_qty']}}"  >										
 								</div>
 							</td>
 							<td class="cart_total">
@@ -86,11 +89,32 @@
 							</td>
 
 							<td>
-								@if(Session::get('customer'))
+								{{--  @if(Session::get('customer'))
 	                          	<a class="btn btn-default check_out" href="{{url('/checkout')}}">Đặt hàng</a>
 	                          	@else 
 	                          	<a class="btn btn-default check_out" href="{{url('/login-checkout')}}">Đặt hàng</a>
-								@endif
+								@endif --}}
+ 								
+ 								
+								@php
+                                   $customer_id = Session::get('customer_id');
+                                   $shipping_id = Session::get('shipping_id');
+                                   if($customer_id!=NULL && $shipping_id==NULL){ 
+                                 @endphp
+                                  <a href="{{URL::to('/checkout')}}" class="btn btn-default check_out" >Đặt hàng</a>
+                                
+                                @php
+                                 }elseif($customer_id!=NULL && $shipping_id!=NULL){
+                                 @endphp
+                                 <a href="{{URL::to('/payment')}}" class="btn btn-default check_out">Đặt hàng</a>
+                                 @php 
+                                }else{
+                                @endphp
+                                 <a href="{{URL::to('/login-checkout')}}" class="btn btn-default check_out" >Đặt hàng</a>
+                                @php
+                                 }
+                                @endphp
+
 							</td>
 
 							

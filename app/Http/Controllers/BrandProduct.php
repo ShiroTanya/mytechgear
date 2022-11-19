@@ -9,9 +9,11 @@ use App\Slider;
 use App\Exports\ExportBrand;
 use App\Imports\ImportBrand;
 use Excel;
+use App\CatePost;
 use Session;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
 session_start();
 
 
@@ -20,7 +22,7 @@ class BrandProduct extends Controller
     //
     public function AuthLogin()
     {
-       $admin_id = Session::get('admin_id');
+       $admin_id = Auth::id();
         if($admin_id){
             return Redirect::to('dashboard');
         }else{
@@ -49,7 +51,7 @@ class BrandProduct extends Controller
         $data = $request->all();
 
         $brand = new Brand();
-        $brand->brand_name = $data['brand_product_name'];
+        $brand->brand_name = $data['brand_name'];
         $brand->brand_slug = $data['brand_slug'];
         $brand->brand_desc = $data['brand_product_desc'];
         $brand->brand_status = $data['brand_product_status'];
@@ -120,6 +122,8 @@ class BrandProduct extends Controller
 //End code admin
 
    public function show_brand_home(Request $request, $brand_slug){
+        $category_post = CatePost::orderby('cate_post_id', 'DESC')->get();
+
         //slider
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
 
@@ -140,7 +144,7 @@ class BrandProduct extends Controller
             //--seo
         }
          
-        return view('pages.brand.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider);
+        return view('pages.brand.show_brand')->with('category',$cate_product)->with('brand',$brand_product)->with('brand_by_id',$brand_by_id)->with('brand_name',$brand_name)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('category_post',$category_post);
     }
 
     public function export_csv_brand()

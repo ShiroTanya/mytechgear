@@ -17,13 +17,14 @@ return [
     */
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
-    'stream' => [
-    'ssl' => [
-            'allow_self_signed' => true,
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-    ],
-    ],
+
+    // 'stream' => [
+    // 'ssl' => [
+    //         'allow_self_signed' => true,
+    //         'verify_peer' => false,
+    //         'verify_peer_name' => false,
+    // ],
+    // ],
 
 
 
@@ -52,7 +53,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,8 +67,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'phamhoanglong.lk4@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Long Pham'),
+        'address' => env('MAIL_FROM_ADDRESS', 'phamhoanglong.lk1@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'TechGear'),
     ],
 
     /*
@@ -81,7 +82,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
+    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------

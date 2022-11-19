@@ -50,9 +50,9 @@ return [
     ],
     
     'google' => [
-        'client_id' => '770246535147-08tbk40i8au6cha2paek4084e3le9qbh.apps.googleusercontent.com',
-        'client_secret' => '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',
-        'redirect' => 'https://shoplpd.com/shopLPD/google/callback'
+        'client_id' => env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => env('GOOGLE_URL')
     ],
 
 

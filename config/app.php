@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
         Laravel\Socialite\SocialiteServiceProvider::class,      //cho provider
 
         /*
@@ -172,11 +173,16 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        App\Providers\BladeServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class, //Print PDF
         Maatwebsite\Excel\ExcelServiceProvider::class, //Print Excel
+
+        Astrotomic\Translatable\TranslatableServiceProvider::class,
+
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
     ],
 
@@ -231,6 +237,8 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,       //cho alias
         'PDF' => Barryvdh\DomPDF\Facade::class,         //Print PDF
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,  //Print Excel
+
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 
 
     ],

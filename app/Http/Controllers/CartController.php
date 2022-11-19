@@ -7,6 +7,7 @@ use DB;
 use Session;
 use App\Http\Requests;
 use App\Slider;
+use App\CatePost;
 use Illuminate\Support\Facades\Redirect;
 use Cart;
 use App\Coupon;
@@ -50,6 +51,9 @@ class CartController extends Controller
     }
     public function gio_hang(Request $request)
     {
+        $category_post = CatePost::orderby('cate_post_id', 'DESC')->get();
+
+
         $slider = Slider::orderBy('slider_id','DESC')->where('slider_status','1')->take(4)->get();
         
         $meta_desc = "Giỏ hàng của bạn"; 
@@ -59,7 +63,7 @@ class CartController extends Controller
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderby('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
-        return view('pages.cart.cart_ajax')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider);
+        return view('pages.cart.cart_ajax')->with('category',$cate_product)->with('brand',$brand_product)->with('meta_desc',$meta_desc)->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)->with('url_canonical',$url_canonical)->with('slider',$slider)->with('category_post',$category_post);
     }
 
      public function add_cart_ajax(Request $request){
@@ -80,6 +84,7 @@ class CartController extends Controller
                 'product_name' => $data['cart_product_name'],
                 'product_id' => $data['cart_product_id'],
                 'product_image' => $data['cart_product_image'],
+                'product_quantity' => $data['cart_product_quantity'],
                 'product_qty' => $data['cart_product_qty'],
                 'product_price' => $data['cart_product_price'],
                 );
@@ -91,6 +96,7 @@ class CartController extends Controller
                 'product_name' => $data['cart_product_name'],
                 'product_id' => $data['cart_product_id'],
                 'product_image' => $data['cart_product_image'],
+                'product_quantity' => $data['cart_product_quantity'],
                 'product_qty' => $data['cart_product_qty'],
                 'product_price' => $data['cart_product_price'],
 
@@ -124,15 +130,28 @@ class CartController extends Controller
         $data = $request->all();
         $cart = Session::get('cart');
         if($cart==true){
+            $message = '';
+
             foreach($data['cart_qty'] as $key => $qty){
+                $i = 0;
                 foreach($cart as $session => $val){
-                    if($val['session_id']==$key){
+                    $i++;
+
+                    if($val['session_id']==$key && $qty<$cart[$session]['product_quantity']){
+
                         $cart[$session]['product_qty'] = $qty;
+                        $message.='<p style="color:blue">'.$i.') Cập nhật số lượng: '.$cart[$session]['product_name'].' ->Thành công</p>';
+
+                    }elseif($val['session_id']==$key && $qty>$cart[$session]['product_quantity']){
+                        $message.='<p style="color:red">'.$i.') Cập nhật số lượng: '.$cart[$session]['product_name'].' ->Thất bại(Số lượng tồn không đủ)</p>';
                     }
+
                 }
+
             }
+
             Session::put('cart',$cart);
-            return redirect()->back()->with('message','Cập nhật số lượng thành công');
+            return redirect()->back()->with('message',$message);
         }else{
             return redirect()->back()->with('message','Cập nhật số lượng thất bại');
         }

@@ -23,7 +23,7 @@
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên sản phẩm</label>
-                                    <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" value="{{$pro->product_name}}">
+                                    <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Tên sản phẩm không được để trống" name="product_name" class="form-control" id="exampleInputEmail1" value="{{$pro->product_name}}">
                                 </div>
                                  <div class="form-group">
                                     <label for="exampleInputEmail1">SL sản phẩm</label>
@@ -35,23 +35,28 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Giá sản phẩm</label>
+                                    <label for="exampleInputEmail1">Giá bán</label>
                                     <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price}}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Giá gốc</label>
+                                    <input type="text" name="price_cost" class="form-control" id="exampleInputEmail1" value="{{$pro->price_cost}}">
                                 </div>
 
                                 <div class="form-group">                           
                                     <label for="exampleInputPassword1">Hình ảnh sản phẩm</label>
                                     <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
                                     <img src="{{URL::to('public/uploads/product/'.$pro->product_image)}}" height="100" width="100">
-
-                                <div class="form-group">                           
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputPassword1">Mô tả sản phẩm</label>
-                                    <textarea style="resize: none" rows="8" class="form-control" name="product_desc"  id="exampleInputPassword1" >{{$pro->product_desc}}</textarea> 
+                                    <textarea style="resize: none" rows="8" class="form-control" name="product_desc" id="ckeditor2">{{$pro->product_desc}}</textarea>
                                 </div>
 
                                 <div class="form-group">                           
                                     <label for="exampleInputPassword1">Nội dung</label>
-                                    <textarea style="resize: none" rows="8" class="form-control" name="product_content"  id="exampleInputPassword1" >{{$pro->product_content}}</textarea> 
+                                    <textarea style="resize: none" rows="8" class="form-control" name="product_content"  id="ckeditor3" >{{$pro->product_content}}</textarea> 
                                 </div>
 
                                 <div class="form-group">
@@ -67,7 +72,15 @@
 
                                     @endforeach
 
-                                </select>    
+                                    
+
+                                </select> 
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tags sản phẩm</label>
+
+                                    <input type="text" data-role="tagsinput" value="{{$pro->product_tags}}" name="product_tags" class="form-control" id="" placeholder="Tên danh mục">
+                                </div>
+
                                 </div> 
 
                                 <div class="form-group">
@@ -89,8 +102,8 @@
                                 <div class="form-group">
                                 <label for="emxampleInputPassword1"> Hiển thị </label>
                                 <select name="product_status" class="form-control input-sm m-bot15">
-                                    <option value="0">Ẩn</option>
-                                    <option value="1">Hiển thị</option>
+                                    <option value="0">Hiển thị</option>
+                                    <option value="1">Ẩn</option>
                                 </select>    
                                 </div>      
 

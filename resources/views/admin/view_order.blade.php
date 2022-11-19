@@ -46,7 +46,7 @@
   
   <div class="panel panel-default">
     <div class="panel-heading">
-     Thông tin vận chuyển hàng
+     Thông tin vận chuyển 
     </div>
     
     
@@ -62,7 +62,7 @@
         <thead>
           <tr>
            
-            <th>Tên người vận chuyển</th>
+            <th>Tên người nhận hàng</th>
             <th>Địa chỉ</th>
             <th>Số điện thoại</th>
             <th>Email</th>
@@ -100,7 +100,7 @@
   
   <div class="panel panel-default">
     <div class="panel-heading">
-      Liệt kê chi tiết đơn hàng
+      Chi tiết đơn hàng
     </div>
    
     <div class="table-responsive">
@@ -125,7 +125,8 @@
             <th>Mã giảm giá</th>
             <th>Phí ship hàng</th>
             <th>Số lượng</th>
-            <th>Giá sản phẩm</th>
+            <th>Giá gốc</th>
+            <th>Giá bán</th>
             <th>Tổng tiền</th>
             
             <th style="width:30px;"></th>
@@ -173,6 +174,7 @@
             @endif
 
             </td>
+            <td>{{number_format($details->product->price_cost ,0,',','.')}}đ</td>
             <td>{{number_format($details->product_price ,0,',','.')}}đ</td>
             <td>{{number_format($subtotal ,0,',','.')}}đ</td>
           </tr>
@@ -201,41 +203,45 @@
             </td>
           </tr>
           <tr>
-            <td colspan="6">
+            <td colspan="2">
               @foreach($order as $key => $or)
+
                 @if($or->order_status==1)
                 <form>
                    @csrf
                   <select class="form-control order_details">
-                    <option value="">----Chọn hình thức đơn hàng-----</option>
                     <option id="{{$or->order_id}}" selected value="1">Chưa xử lý</option>
-                    <option id="{{$or->order_id}}" value="2">Đã xử lý-Đã giao hàng</option>
-                    <option id="{{$or->order_id}}" value="3">Hủy đơn hàng-tạm giữ</option>
+                    <option id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
+                    <option id="{{$or->order_id}}" value="3">Đơn hàng đã bị hủy</option>
                   </select>
                 </form>
+
                 @elseif($or->order_status==2)
                 <form>
                   @csrf
-                  <select class="form-control order_details">
-                    <option value="">----Chọn hình thức đơn hàng-----</option>
-                    <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
-                    <option id="{{$or->order_id}}" selected value="2">Đã xử lý-Đã giao hàng</option>
-                    <option id="{{$or->order_id}}" value="3">Hủy đơn hàng-tạm giữ</option>
+                  <select class="form-control order_details">               
+                    <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                    <option id="{{$or->order_id}}" selected value="2">Đã xử lý - Đã giao hàng</option>
+                    <option disabled id="{{$or->order_id}}" value="3">Đơn hàng đã bị hủy</option>
                   </select>
                 </form>
+
 
                 @else
                 <form>
                    @csrf
                   <select class="form-control order_details">
-                    <option value="">----Chọn hình thức đơn hàng-----</option>
-                    <option id="{{$or->order_id}}" value="1">Chưa xử lý</option>
-                    <option id="{{$or->order_id}}"  value="2">Đã xử lý-Đã giao hàng</option>
-                    <option id="{{$or->order_id}}" selected value="3">Hủy đơn hàng-tạm giữ</option>
+                    <option disabled id="{{$or->order_id}}" value="1">Chưa xử lý</option>
+                    <option disabled id="{{$or->order_id}}" value="2">Đã xử lý - Đã giao hàng</option>
+                    <option id="{{$or->order_id}}" selected value="3">Đơn hàng đã bị hủy</option>
                   </select>
-                </form>
-
+                </form
                 @endif
+
+
+
+
+
                 @endforeach
 
 
@@ -243,7 +249,13 @@
           </tr>
         </tbody>
       </table>
-      <a target="_blank" href="{{url('/print-order/'.$details->order_code)}}">In đơn hàng</a>
+      
+
+      <div style="text-align: left;margin-top: 15px">
+                  <button class="btn btn-info">
+                     <a style="color: #fff" target="_blank" href="{{url('/print-order/'.$details->order_code)}}">In đơn hàng</a>
+                  </button>
+            </div>
     </div>
    
   </div>

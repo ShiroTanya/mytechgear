@@ -6,10 +6,21 @@ use Illuminate\Http\Request;
 use App\Coupon;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
 session_start();
 
 class CouponController extends Controller
 {
+    public function AuthLogin(){
+        $admin_id = Auth::id();;
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
+    }
+
+
     public function unset_coupon(){
         $coupon = Session::get('coupon');
         if($coupon==true){
@@ -28,7 +39,7 @@ class CouponController extends Controller
         return Redirect::to('list-coupon');
     }
     public function list_coupon(){
-        $coupon = Coupon::orderby('coupon_id','DESC')->get();
+        $coupon = Coupon::orderby('coupon_id','DESC')->paginate(2);
         return view('admin.coupon.list_coupon')->with(compact('coupon'));
     }
     public function insert_coupon_code(Request $request){

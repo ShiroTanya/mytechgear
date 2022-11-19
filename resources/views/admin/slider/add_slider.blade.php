@@ -20,7 +20,7 @@
                                     {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tên slider</label>
-                                    <input type="text" name="slider_name" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục">
+                                    <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Tên slider không được để trống" name="slider_name" class="form-control" id="exampleInputEmail1" placeholder="Tên slider">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Hình ảnh</label>
