@@ -12,6 +12,7 @@
                         @endforeach
 
 
+
                         {{-- <div class="col-sm-4">
                              <label for="amount">Lọc giá theo</label>
 
@@ -28,7 +29,8 @@
 
 
                         @foreach($category_by_id as $key => $product)
-                        <a href="{{URL::to('/chi-tiet-san-pham/'.$product->product_slug)}}">
+
+                        <input type="hidden" id="wishlist_productprice2{{$product->product_id}}" value="{{number_format($product->product_price,0,',','.')}}VNĐ" class="cart_product_price_2{{$product->product_id}}">
                         <div class="col-sm-4">
                             <div class="product-image-wrapper">
                            
@@ -44,7 +46,16 @@
                                             <input type="hidden" value="{{$product->product_quantity}}" class="cart_product_quantity_{{$product->product_id}}">
                                             
                                             <input type="hidden" value="{{$product->product_image}}" class="cart_product_image_{{$product->product_id}}">
+
+
+
                                             <input type="hidden" id="wishlist_productprice{{$product->product_id}}" value="{{$product->product_price}}" class="cart_product_price_{{$product->product_id}}">
+
+
+                                            <input type="hidden" id="wishlist_productcontent{{$product->product_id}}" value="{{$product->product_content}}">
+
+                                            <input type="hidden" value="{{$product->product_price}}" class="cart_product_price_{{$product->product_id}}">
+
                                             <input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
 
                                             <a id="wishlist_producturl{{$product->product_id}}" href="{{URL::to('/chi-tiet-san-pham/'.$product->product_slug)}}">
@@ -57,20 +68,6 @@
                                              </a>
                                             <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">Thêm giỏ hàng</button>
                                             </form>
-
-                                            <style type="text/css">
-                                                p.qrcode_style{
-                                                    position: absolute ;
-                                                    top: 2%;
-                                                    left: 3%;
-                                                }
-                                            </style>
-
-                                            @php
-                                            $qrcode_url = url('chi-tiet-san-pham/'.$product->product_slug);
-                                                
-                                            @endphp                                         
-                                            <p class="qrcode_style">{{QrCode::size(70)->generate($qrcode_url)}}</p>
  
                                         </div>
                                       
@@ -104,13 +101,52 @@
                                             <i class="fa fa-plus-square"></i>
                                             <button class="button_wishlist" id="{{$product->product_id}}" onclick="add_wishlist(this.id);"><span>Yêu thích</span></button>
                                         </li>
-                                        <li><a href="#"><i class="fa fa-plus-square"></i>So sánh</a></li>
+                                        <li><a style="cursor: pointer;" onclick="add_compare({{$product->product_id}})"><i class="fa fa-plus-square"></i>So sánh</a></li>
+
+                                        <div class="container">
+
+                                            <div class="modal fade" id="sosanh" role="dialog">
+                                              <div class="modal-dialog">
+
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                      &times;
+                                                    </button>
+                                                    <h4 class="modal-title"><span id="title-compare"></span></h4>
+                                                  </div>
+                                                  <div class="modal-body"> 
+                                                        <table class="table table-hover" id="row_compare">
+                                                          <thead class="thead-dark">
+                                                            <tr>
+                                                              <th >Tên sản phẩm</th>
+                                                              <th >Giá</th>
+                                                              <th >Hình ảnh</th>
+                                                              <th>Thông số</th>
+                                                              <th>Hiển thị</th>
+                                                              <th>Xóa</th>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            
+                                                          </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+                                                  </div>
+                                                </div>
+
+                                              </div>
+                                            </div>
+
+                                        </div>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-                        </a>
                         @endforeach
 
 

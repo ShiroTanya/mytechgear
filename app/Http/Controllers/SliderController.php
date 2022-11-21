@@ -11,12 +11,16 @@ use DB;
 use Auth;
 class SliderController extends Controller
 {
-    public function AuthLogin(){
-        $admin_id = Auth::id();;
-        if($admin_id){
+    public function AuthLogin()
+    {
+        $admin_id = Auth::id();
+        if($admin_id)
+        {
             return Redirect::to('dashboard');
-        }else{
-            return Redirect::to('admin')->send();
+        }
+        else
+        {
+            return Redirect::to('login-auth')->send();
         }
     }
     public function manage_slider(){

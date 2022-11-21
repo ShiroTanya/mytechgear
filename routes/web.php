@@ -118,10 +118,10 @@ Route::post('/update-post/{post_id}','PostController@update_post');
 
 
 //Product
-Route::group(['middleware' => 'auth.roles'], function () {
+// Route::group(['middleware' => 'auth.roles'], function () {
 	Route::get('/add-product','ProductController@add_product');
 	Route::get('/edit-product/{product_id}','ProductController@edit_product');
-});
+// });
 Route::get('delete-user-roles/{admin_id}','UserController@delete_user_roles')->middleware('auth.roles');
 Route::get('users','UserController@index')->middleware('auth.roles');
 Route::get('add-users','UserController@add_users')->middleware('auth.roles');

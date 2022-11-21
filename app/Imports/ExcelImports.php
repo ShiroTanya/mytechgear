@@ -21,6 +21,7 @@ class ExcelImports implements ToModel
             'category_desc' => $row[3],
             'category_parent' => $row[4],
             'category_status' => $row[5],
+            
         ]);
     }
 }

@@ -16,16 +16,19 @@ class ImportProduct implements ToModel
     {
           return new Product([
            'product_name' => $row[0], 
-           'product_quantity' => $row[1],
-           'product_sold' => $row[2],
-           'product_slug' => $row[3],
-           'category_id' => $row[4],
-           'brand_id' => $row[5],
-           'product_desc' => $row[6],
-           'product_content' => $row[7],
-           'product_price' => $row[8],
-           'product_image' => $row[9],
-           'product_status' => $row[10],
+           'product_tags' => $row[1],
+           'product_quantity' => $row[2],
+           'product_sold' => $row[3],
+           'product_slug' => $row[4],
+           'category_id' => $row[5],
+           'brand_id' => $row[6],
+           'product_desc' => $row[7],
+           'product_content' => $row[8],
+           'product_price' => $row[9],
+           'price_cost' => $row[10],
+           'product_image' => $row[11],
+           'product_views' => $row[12],
+           'product_status' => $row[13],
         ]);
     }
 }

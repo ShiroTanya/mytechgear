@@ -119,8 +119,8 @@
 							</tbody>
 						</table>
 					</div>
-					<p style="color: #fff;text-align: center;;font-size: 15px"> Xem lại lịch sử đơn hàng đã đặt tại: <a href="{{URL::to('/history')}}" =>Lịch sử đơn hàng của bạn</a></p>
-					<p style="color: #fff;text-align: center;;font-size: 15px"> Mọi chi tiết xin liên hệ tại website: <a target="_blank" href="http://techgear.com/techgear">Shop</a>, hoặc liên hệ qua hotline: 0961247427.Xin cảm ơn quý khách đã đặt mua qua website của chúng tôi. Trân trọng !!! </p>
+					<p style="color: #fff;text-align: center;;font-size: 15px"> Xem lại lịch sử đơn hàng đã đặt tại: <a style="color: black" href="{{URL::to('/history')}}" =>Lịch sử đơn hàng của bạn</a></p>
+					<p style="color: #fff;text-align: center;;font-size: 15px"> Mọi chi tiết xin liên hệ tại website: <a style="color: black" target="_blank" href="http://techgear.com/techgear">Shop</a>, hoặc liên hệ qua hotline: 0961247427.Xin cảm ơn quý khách đã đặt mua qua website của chúng tôi. Trân trọng !!! </p>
 		</div>
 	</div>
 </div>

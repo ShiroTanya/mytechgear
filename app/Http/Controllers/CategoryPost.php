@@ -24,7 +24,7 @@ class CategoryPost extends Controller
         }
         else
         {
-            return Redirect::to('admin')->send();
+            return Redirect::to('login-auth')->send();
         }
     }
 
