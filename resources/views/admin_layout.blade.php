@@ -174,7 +174,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </li>
 
-               {{--  <li class="sub-menu">
+                {{-- <li class="sub-menu">
                     <a href="javascript:;">
                         <span>Vận chuyển</span>
                     </a>
@@ -273,6 +273,90 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        fetch_delivery();
+
+        function fetch_delivery(){
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url : '{{url('/select-feeship')}}',
+                method: 'POST',
+                data:{_token:_token},
+                success:function(data){
+                   $('#load_delivery').html(data);
+                }
+            });
+        }
+        $(document).on('blur','.fee_feeship_edit',function(){
+
+            var feeship_id = $(this).data('feeship_id');
+            var fee_value = $(this).text();
+             var _token = $('input[name="_token"]').val();
+            // alert(feeship_id);
+            // alert(fee_value);
+            $.ajax({
+                url : '{{url('/update-delivery')}}',
+                method: 'POST',
+                data:{feeship_id:feeship_id, fee_value:fee_value, _token:_token},
+                success:function(data){
+                   fetch_delivery();
+                }
+            });
+
+        });
+        $('.add_delivery').click(function(){
+
+           var city = $('.city').val();
+           var province = $('.province').val();
+           var wards = $('.wards').val();
+           var fee_ship = $('.fee_ship').val();
+            var _token = $('input[name="_token"]').val();
+           // alert(city);
+           // alert(province);
+           // alert(wards);
+           // alert(fee_ship);
+            $.ajax({
+                url : '{{url('/insert-delivery')}}',
+                method: 'POST',
+                data:{city:city, province:province, _token:_token, wards:wards, fee_ship:fee_ship},
+                success:function(data){
+                   fetch_delivery();
+                }
+            });
+
+
+        });
+        $('.choose').on('change',function(){
+            var action = $(this).attr('id');
+            var ma_id = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            var result = '';
+            // alert(action);
+            //  alert(matp);
+            //   alert(_token);
+
+            if(action=='city'){
+                result = 'province';
+            }else{
+                result = 'wards';
+            }
+            $.ajax({
+                url : '{{url('/select-delivery')}}',
+                method: 'POST',
+                data:{action:action,ma_id:ma_id,_token:_token},
+                success:function(data){
+                   $('#'+result).html(data);     
+                }
+            });
+        }); 
+    })
+
+
+</script>
+
 
 <script type="text/javascript">
     $('.comment_duyet_btn').click(function(){
@@ -560,12 +644,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
 </script>
 
-{{-- 
-<script type="text/javascript">
-    $.validate({
-
-    });
-</script> --}}
 <script>
     CKEDITOR.replace('ckeditor');
     CKEDITOR.replace('ckeditor1');
@@ -579,88 +657,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/backend/js/monthly.js')}}"></script>
 
-
-<script type="text/javascript"> //------Ajax Vận chuyển (option nơi vận chuyển)-----
-    $(document).ready(function(){
-
-        fetch_delivery();
-
-        function fetch_delivery(){
-            var _token = $('input[name="_token"]').val();
-             $.ajax({
-                url : '{{url('/select-feeship')}}',
-                method: 'POST',
-                data:{_token:_token},
-                success:function(data){
-                   $('#load_delivery').html(data);
-                }
-            });
-        }
-        $(document).on('blur','.fee_feeship_edit',function(){
-            // Thuộc tính onblur được kích hoạt ngay khi người dùng chuyển con trỏ nháy ra ngoài thẻ.
-
-            var feeship_id = $(this).data('feeship_id');
-            var fee_value = $(this).text();
-             var _token = $('input[name="_token"]').val();
-            // alert(feeship_id);
-            // alert(fee_value);
-            $.ajax({
-                url : '{{url('/update-delivery')}}',
-                method: 'POST',
-                data:{feeship_id:feeship_id, fee_value:fee_value, _token:_token},
-                success:function(data){
-                   fetch_delivery();
-                }
-            });
-
-        });
-        $('.add_delivery').click(function(){
-
-           var city = $('.city').val();
-           var province = $('.province').val();
-           var wards = $('.wards').val();
-           var fee_ship = $('.fee_ship').val();
-            var _token = $('input[name="_token"]').val();
-           // alert(city);
-           // alert(province);
-           // alert(wards);
-           // alert(fee_ship);
-            $.ajax({
-                url : '{{url('/insert-delivery')}}',
-                method: 'POST',
-                data:{city:city, province:province, _token:_token, wards:wards, fee_ship:fee_ship},
-                success:function(data){
-                   fetch_delivery();
-                }
-            });
-
-
-        });
-        $('.choose').on('change',function(){
-            var action = $(this).attr('id');
-            var ma_id = $(this).val();
-            var _token = $('input[name="_token"]').val();
-            var result = '';
-            // alert(action);
-            //  alert(matp);
-            //   alert(_token);
-
-            if(action=='city'){
-                result = 'province';
-            }else{
-                result = 'wards';
-            }
-            $.ajax({
-                url : '{{url('/select-delivery')}}',
-                method: 'POST',
-                data:{action:action,ma_id:ma_id,_token:_token},
-                success:function(data){
-                   $('#'+result).html(data);     
-                }
-            });
-        }); 
-    })
-</script>
 
 <script type="text/javascript">
         

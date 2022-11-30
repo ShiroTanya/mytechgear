@@ -7,6 +7,16 @@
                             Thêm bài viết
                         </header>
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                         <?php
                             $message = Session::get('message');
                             if($message)
@@ -48,7 +58,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Hình ảnh đại diện cho bài viết</label>
-                                    <input type="file" name="post_image" class="form-control" id="exampleInputEmail1" >
+                                    <input type="file" name="post_image" class="form-control" id="exampleInputEmail1" required="">
                                 </div>
 
                                 <div class="form-group">

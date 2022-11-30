@@ -47,6 +47,19 @@ class CouponController extends Controller
         return view('admin.coupon.list_coupon')->with(compact('coupon'));
     }
     public function insert_coupon_code(Request $request){
+
+
+        $data = $request -> validate(
+        [
+            'coupon_code' => 'required|unique:tbL_coupon|max:255',
+            // 'price_cost' => 'required|numeric|min:1|max:20',
+        ],
+        [
+            'coupon_code.required' => 'Cần thêm tên sản phẩm',
+            'coupon_code.unique' => 'Mã giảm giá đã tồn tại',
+        ]);
+
+
         $data = $request->all();
 
         $coupon = new Coupon;

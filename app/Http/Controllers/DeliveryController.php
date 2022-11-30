@@ -56,6 +56,19 @@ class DeliveryController extends Controller
     }
     public function insert_delivery(Request $request){
         $data = $request->all();
+
+        //     $data = $request -> validate(
+        //     [
+        //         'wards' => 'required|unique:tbl_feeship|max:50',
+        //     ],
+        //     [
+        //         'wards.required' => 'Cần thêm tiêu đề cho sản phẩm',
+        //         'wards.unique' => 'Tiêu đề đã tồn tại',
+        //     ]
+        // );
+
+
+
         $fee_ship = new Feeship();
         $fee_ship->fee_matp = $data['city'];
         $fee_ship->fee_maqh = $data['province'];

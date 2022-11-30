@@ -49,6 +49,16 @@ class SliderController extends Controller
         
         $this->AuthLogin();
 
+        $data = $request -> validate(
+        [
+            'slider_image' => 'required|image|mimes:jpeg,jpg,png,svg',
+        ],
+        [
+            'slider_image.required' => 'Cần hình ảnh banner',
+            'slider_image.image' => 'Cần hình ảnh banner',
+            'slider_image.mimes' => 'Bạn cần chọn đúng file (png,jpg,jpeg,...)'
+        ]);
+
         $data = $request->all();
         $get_image = request('slider_image');
       

@@ -37,10 +37,23 @@
 							<div class="col-md-6 form-style">
 								<form method="POST">
 									@csrf
-									<input type="text" name="shipping_email" class="shipping_email form-control" placeholder="Điền email">
-									<input type="text" name="shipping_name" class="shipping_name form-control" placeholder="Họ và tên người nhận">
-									<input type="text" name="shipping_address" class="shipping_address form-control" placeholder="Địa chỉ gửi hàng">
-									<input type="text" name="shipping_phone" class="shipping_phone form-control" placeholder="Số điện thoại">
+
+								<div class="form-group">
+									<input type="text" data-validation="email" data-validation-error-msg="Vui lòng điền vào email"  name="shipping_email" class="shipping_email form-control" placeholder="Điền email">
+								</div>
+
+								<div class="form-group">
+									<input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Nhập tên người nhận" name="shipping_name" class="shipping_name form-control" placeholder="Họ và tên người nhận">
+								</div>
+
+								<div class="form-group">
+									<input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Địa chỉ gửi hàng không được để trống" name="shipping_address" class="shipping_address form-control" placeholder="Địa chỉ gửi hàng">
+								</div>
+
+								<div class="form-group">
+									<input type="text" data-validation="number" data-validation-error-msg="Vui lòng nhập SĐT" name="shipping_phone" class="shipping_phone form-control" placeholder="Số điện thoại">
+								</div>
+
 									<textarea name="shipping_notes" class="shipping_notes form-control" placeholder="Ghi chú đơn hàng của bạn" rows="5"></textarea>
 									
 									@if(Session::get('fee'))

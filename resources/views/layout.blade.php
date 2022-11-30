@@ -514,10 +514,17 @@
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
     <script src="{{asset('public/frontend/js/owl.carousel.js')}}"></script>
+    <script src="{{asset('public/backend/js/jquery.form-validator.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/sweetalert.min.js')}}"></script>
     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0" nonce="8l4pK4n0"></script>
+<script type="text/javascript">
+        
+        $.validate({
 
+        }); 
+
+</script>
 <script type="text/javascript">
     $('.owl-carousel').owlCarousel({
     loop:true,

@@ -51,20 +51,32 @@ class BrandProduct extends Controller
     public function save_brand_product(Request $request)
     {
         $this -> AuthLogin();
-        $data = $request->all();
 
-        $brand = new Brand();
-        $brand->brand_name = $data['brand_name'];
-        $brand->brand_slug = $data['brand_slug'];
-        $brand->brand_desc = $data['brand_product_desc'];
-        $brand->brand_status = $data['brand_product_status'];
-        $brand->save();
+        // $data = $request->all();
+
+        $data = $request -> validate(
+        [
+            'brand_name' => 'required|unique:tbl_brand|max:255',
+        ],
+        [
+            'brand_name.required' => 'Cần thêm tên thương hiệu',
+            'brand_name.unique' => 'Thương hiệu đã tồn tại',
+        ]);
 
         // $data = array();
-        // $data['brand_name'] = $request->brand_product_name;
-        // $data['brand_desc'] = $request->brand_product_desc;
-        // $data['brand_status'] = $request->brand_product_status;
-        // DB::table('tbl_brand')->insert($data);
+        $data['brand_name'] = $request->brand_name;
+        $data['brand_slug'] = $request->brand_slug;
+        $data['brand_desc'] = $request->brand_product_desc;
+        $data['brand_status'] = $request->brand_product_status;
+        DB::table('tbl_brand')->insert($data);
+
+        // $brand = new Brand();
+        // $brand->brand_name = $data['brand_name'];
+        // $brand->brand_slug = $data['brand_slug'];
+        // $brand->brand_desc = $data['brand_product_desc'];
+        // $brand->brand_status = $data['brand_product_status'];
+        // $brand->save();
+
         Session::put('message','Thêm thương hiệu sản phẩm thành công');
         return Redirect::to('add-brand-product');
     }

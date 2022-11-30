@@ -37,10 +37,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<form action="{{URL::to('/registera')}}" method="post">
 			{{ csrf_field() }}		
-			<input type="text" class="ggg" name="admin_name" placeholder="Nhập họ tên" required="">
-			<input type="text" class="ggg" name="admin_email" placeholder="Nhập email" required="">
-			<input type="text" class="ggg" name="admin_phone" placeholder="Nhập sđt" required="">
-			<input type="password" class="ggg" name="admin_password" placeholder="Nhập mật khẩu" required="">
+			<input type="text" class="@error('admin_name') is-invalid @enderror ggg" name="admin_name" placeholder="Nhập họ tên">
+			@error('admin_name')
+			    {{ $message }}
+			@enderror
+
+			<input type="text" class="@error('admin_email') is-invalid @enderror ggg" name="admin_email" placeholder="Nhập email">
+			@error('admin_email')
+			    {{ $message }}
+			@enderror
+
+			<input type="text" class="@error('admin_phone') is-invalid @enderror ggg" name="admin_phone" placeholder="Nhập sđt">
+			@error('admin_phone')
+			    {{ $message }}
+			@enderror
+
+			<input type="password" class="@error('admin_password') is-invalid @enderror ggg" name="admin_password" placeholder="Nhập mật khẩu">
+			@error('admin_password')
+			    {{ $message }}
+			@enderror
 
 				<div class="clearfix"></div>
 				<input type="submit" value="Đăng Ký" name="login">

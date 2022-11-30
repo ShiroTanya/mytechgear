@@ -157,7 +157,27 @@ class ProductController extends Controller
     public function save_product(Request $request)
     {
         $this -> AuthLogin();
-        $data = array();
+        // $data = array();
+
+        $data = $request -> validate(
+        [
+            'product_name' => 'required|unique:tbl_product|max:255',
+            'product_image' => 'required|image|mimes:jpeg,jpg,png,svg',
+            // 'price_cost' => 'required|numeric|min:1|max:20',
+        ],
+        [
+            'product_name.required' => 'Cần thêm tên sản phẩm',
+            'product_name.unique' => 'Tên sản phẩm đã tồn tại',
+            'product_image.required' => 'Cần hình ảnh sản phẩm',
+            'product_image.image' => 'Cần hình ảnh sản phẩm',
+            'product_image.mimes' => 'Bạn cần chọn đúng file (png,jpg,jpeg,...)'
+            // 'price_cost.required' => 'Cần thêm giá gốc',
+        ]);
+
+        $product_price = filter_var($request->product_price, FILTER_SANITIZE_NUMBER_INT);
+        $price_cost = filter_var($request->price_cost, FILTER_SANITIZE_NUMBER_INT);
+
+
         $data['product_name'] = $request->product_name;
         $data['product_quantity'] = $request->product_quantity;
         $data['product_tags'] = $request->product_tags;
@@ -171,6 +191,10 @@ class ProductController extends Controller
         $data['brand_id'] = $request->product_brand;
         $data['product_status'] = $request->product_status;
         $data['product_image'] = $request->product_image;
+
+
+
+
 
         $get_image = $request->file('product_image');
 

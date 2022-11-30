@@ -197,16 +197,16 @@
 
 									<form action="#">
 										<span>
-											<input style="width:100%;margin-left:0" type="text" class="comment_name" placeholder="Tên bình luận"/>
+											<input style="width:100%;margin-left:0" type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Nhập tên bình luận" class="comment_name" placeholder="Tên bình luận"/>
 										</span>
 										<div id="notify_comment"></div>
-										<textarea name="comment" class="comment_content" placeholder="Nội dung" ></textarea>
+									<span>
+										<textarea name="comment" data-validation="length" data-validation-length="min1" data-validation-error-msg="Vui lòng không để trống nội đung bình luận" class="comment_content input" placeholder="Nội dung" ></textarea>
+									</span>
 										<b>Đánh giá: </b> <img src="images/product-details/rating.png" alt="" />
 										<button type="button" class="btn btn-default pull-right send-comment">
 											Gửi bình luận
-										</button>
-
-										
+										</button>						
 									</form>
 								</div>
 							</div>

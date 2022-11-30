@@ -35,11 +35,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	}
 	?>
 
+
+
 		<form action="{{URL::to('/login')}}" method="post">
 			{{ csrf_field() }}	
-			<input type="text" class="ggg" name="admin_email" placeholder="Nhập email" >
-			<input type="password" class="ggg" name="admin_password" placeholder="Nhập mật khẩu" >
+			<input type="text" class="@error('admin_email') is-invalid @enderror ggg" name="admin_email" placeholder="Nhập email" >
+			@error('admin_email')
+			    {{ $message }}
+			@enderror
 
+			<input type="password"  class="@error('admin_password') is-invalid @enderror ggg" name="admin_password" placeholder="Nhập mật khẩu" >
+			@error('admin_password')
+			    {{ $message }}
+			@enderror
+<div><br></div>
 			<span><input type="checkbox" />Nhớ đăng nhập</span>
 			<h6><a href="#">Quên mật khẩu?</a></h6>
 				<div class="clearfix"></div>

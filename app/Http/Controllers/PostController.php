@@ -42,6 +42,26 @@ class PostController extends Controller
    public function save_post(Request $request)
     {
         $this -> AuthLogin();
+
+             $data = $request -> validate(
+        [
+            'post_desc' => 'required|max:255',
+            'post_content' => 'required|max:255',
+            'post_image' => 'required|image|mimes:jpeg,jpg,png,svg',
+            // 'price_cost' => 'required|numeric|min:1|max:20',
+        ],
+        [
+            'post_desc.required' => 'Bạn chưa điền tóm tắt bài viết',
+            'post_content.required' => 'Bạn chưa điền nội dung bài viết',
+            'post_image.required' => 'Cần hình ảnh sản phẩm',
+            'post_image.image' => 'Cần hình ảnh sản phẩm',
+            'post_image.mimes' => 'Bạn cần chọn đúng file (png,jpg,jpeg,...)'
+            // 'price_cost.required' => 'Cần thêm giá gốc',
+        ]);
+
+
+
+
         $data = $request->all();        
         $post = new Post();  //model se tao ra mot du lieu moi
         $post->post_title = $data['post_title']; //du lieu duoc gui tu add_post.blade.php
