@@ -41,7 +41,7 @@
                             }
                             ?>
 
-      <table class="table table-striped b-t b-light">
+      <table class="table table-striped b-t b-light" id="table_id">
         <thead>
           <tr>
             <th style="width:20px;">

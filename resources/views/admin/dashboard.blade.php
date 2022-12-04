@@ -47,11 +47,11 @@
 		<div class="col-md-2">
 			<p> Lọc theo: 
 				<select class="dashboard-filter form-control">
-					<option>--Chọn--</option>
-					<option value="7ngay">--7 ngày qua--</option>
-					<option value="thangnay">--tháng này--</option>
-					<option value="thangtruoc">--tháng trước--</option>
-					<option value="365ngayqua">--365 ngày--</option>					
+					<option disabled selected>--Chọn--</option>
+					<option value="7ngay">7 ngày qua</option>
+					<option value="thangnay">tháng này</option>
+					<option value="thangtruoc">tháng trước</option>
+					<option value="365ngayqua">365 ngày</option>					
 				</select>
 			</p>			
 		</div>
@@ -91,6 +91,7 @@
 </div> --}}
 
 <div class="row" style="margin-top: 50px">
+	
 	<div class="col-md-4 col-xs-12">
 		<p class="title_thongke" style="font-size: 24px;">Tổng Sản phẩm/Khách hàng/Đơn hàng/Bài viết</p>
 		<div id="donut"></div>
@@ -100,9 +101,9 @@
 		<p class="title_thongke" style="font-size: 24px; margin-right: 150px">Bài viết xem nhiều</p>
 		<ol class="list_views">
 			@foreach($post_views as $key => $post)
-			<li>
-				<a  target="_blank" href="{{url('/bai-viet/'.$post->post_slug)}}">{{$post->post_title}} | 
-					<span style="color: black">{{$post->post_views}}</span>
+			<li style="color: black">
+				<a  style="color: black" target="_blank" href="{{url('/bai-viet/'.$post->post_slug)}}">{{$post->post_title}} | 
+					<span style="color: purple">{{$post->post_views}}</span>
 				</a>
 			</li>
 			@endforeach
@@ -113,9 +114,9 @@
 		<p class="title_thongke" style="font-size: 24px; margin-right: 250px">Sản phẩm xem nhiều</p>
 		<ol class="list_views">
 			@foreach($product_views as $key => $pro)
-			<li>
-				<a  target="_blank" href="{{url('/chi-tiet-san-pham/'.$pro->product_slug)}}">{{$pro->product_name}} | 
-					<span style="color: black">{{$pro->product_views}}</span>
+			<li style="color: black">
+				<a  style="color: black" target="_blank" href="{{url('/chi-tiet-san-pham/'.$pro->product_slug)}}">{{$pro->product_name}} | 
+					<span style="color: purple">{{$pro->product_views}}</span>
 				</a>
 			</li>
 			@endforeach

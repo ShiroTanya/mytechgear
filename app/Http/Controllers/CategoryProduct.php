@@ -35,9 +35,18 @@ class CategoryProduct extends Controller
     public function add_category_product()
     {
         $this -> AuthLogin();
-        $category = CategoryProductModel::where('category_parent',0)->orderby('category_id','DESC')->get();
+        
+        $category = CategoryProductModel::where('category_parent',0)->where('category_status',0)->orderby('category_id','DESC')->get();
         return view('admin.add_category_product')->with(compact('category'));
     }
+
+    // public function getCategoriesProduct()
+    // {
+    //     $category = CategoryProductModel::where('category_parent',0)->where('category_status',0)->orderby('category_id','DESC')->get();
+    //     $listCategory = [];
+    //     CategoryProductModel::recursive($categories, $parents = 0, $level = 1, $listCategory);
+    //     return $listCategory;
+    // }
 
     public function all_category_product()
     {

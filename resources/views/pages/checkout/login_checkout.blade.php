@@ -48,7 +48,7 @@
 					@csrf
 
 					<span class="login100-form-title p-b-53">
-						Đăng nhâp với
+						Đăng nhập với
 
 					</span>
 
@@ -65,31 +65,31 @@
 
 					<div class="p-t-31 p-b-9">
 						<span class="txt1">
-							Tên đăng nhâp
+							Tên đăng nhập
 						</span>
 					</div>
-					<div class="wrap-input100 validate-input" data-validate="Không được để trống tên đăng nhâp">
-						<input class="input100" type="text" name="email_account" placeholder="Nhâp tài khoản">
+					<div class="wrap-input100 validate-input" data-validate="Không được để trống tên đăng nhập">
+						<input class="input100" type="text" name="email_account" placeholder="Nhập tài khoản">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="p-t-13 p-b-9">
 						<span class="txt1">
-							Mât khâu
+							Mật khâu
 						</span>
 
 						<a href="{{URL::to('/quen-mat-khau')}}" class="txt2 bo1 m-l-5">
-							Quên mât khâu?
+							Quên mật khẩu?
 						</a>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate="Không được để trống mât khâu">
-						<input class="input100" type="password" name="password_account" placeholder="Nhâp mât khâu">
+						<input class="input100" type="password" name="password_account" placeholder="Nhập mật khẩu">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-17">
 						<button type="submit" class="login100-form-btn">
-							Đăng nhâp
+							Đăng nhập
 						</button>
 					</div>
 

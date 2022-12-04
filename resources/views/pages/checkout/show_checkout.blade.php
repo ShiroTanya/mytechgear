@@ -191,7 +191,7 @@
 												
 											</p>
 										</td>
-										<td class="cart_delete">
+										<td class="cart_delete" style="margin: 15px">
 											<a class="cart_quantity_delete" href="{{url('/del-product/'.$cart['session_id'])}}"><i class="fa fa-times"></i></a>
 										</td>
 									</tr>

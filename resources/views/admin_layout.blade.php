@@ -23,11 +23,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- calendar -->
 <link rel="stylesheet" href="{{asset('public/backend/css/monthly.css')}}">
 <link rel="stylesheet" href="{{asset('public/backend/css/bootstrap-tagsinput.css')}}">
+<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" async defer></script>
-<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" type="text/css"/>
+{{-- <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" type="text/css"/>
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
+ --}}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- //calendar -->
@@ -174,7 +175,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </li>
 
-                {{-- <li class="sub-menu">
+            {{--     <li class="sub-menu">
                     <a href="javascript:;">
                         <span>Vận chuyển</span>
                     </a>
@@ -634,8 +635,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             method: 'POST',
                             data:{_token:_token, order_status:order_status ,order_id:order_id ,quantity:quantity, order_product_id:order_product_id},
                             success:function(data){
-                                alert('Thay đổi tình trạng đơn hàng thành công');
-                                location.reload();
+                                 swal("Đơn hàng", "Thay đổi tình trạng đơn hàng thành công", "success");
+
+                    window.setTimeout(function(){ 
+                            location.reload();
+                        } ,5000);
                             }
                 });
             
@@ -665,7 +669,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         }); 
 
 </script>
-
 
 </body>
 </html>

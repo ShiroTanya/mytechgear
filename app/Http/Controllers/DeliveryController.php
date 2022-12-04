@@ -55,19 +55,20 @@ class DeliveryController extends Controller
         
     }
     public function insert_delivery(Request $request){
+        
+
+        // $data = $request -> validate(
+        // [
+        //     'wards' => 'required|unique:tbl_xaphuongthitran|max:255',
+        //     // 'price_cost' => 'required|numeric|min:1|max:20',
+        // ],
+        // [
+        //     'wards.required' => 'Cần thêm tên sản phẩm',
+        //     'wards.unique' => 'Mã giảm giá đã tồn tại',
+        // ]);
+
+
         $data = $request->all();
-
-        //     $data = $request -> validate(
-        //     [
-        //         'wards' => 'required|unique:tbl_feeship|max:50',
-        //     ],
-        //     [
-        //         'wards.required' => 'Cần thêm tiêu đề cho sản phẩm',
-        //         'wards.unique' => 'Tiêu đề đã tồn tại',
-        //     ]
-        // );
-
-
 
         $fee_ship = new Feeship();
         $fee_ship->fee_matp = $data['city'];
